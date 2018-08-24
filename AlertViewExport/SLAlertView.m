@@ -117,6 +117,10 @@ static CGFloat const SLAlertViewTopMargin = 10.f;
     return self;
 }
 
+- (void)dealloc {
+    self.delegate = nil;
+}
+
 - (void)show {
     [self settingFrame];
     
@@ -162,7 +166,6 @@ static CGFloat const SLAlertViewTopMargin = 10.f;
         [self.delegate alertView:self clickedButtonAtIndex:button.tag];
     }
     
-    self.delegate = nil;
     [self removeFromSuperview];
 }
 
@@ -189,6 +192,10 @@ static CGFloat const SLAlertViewTopMargin = 10.f;
 #pragma mark - Private method
 #pragma mark - LayoutSubviews
 - (void)settingFrame {
+    if (self.superview) {
+        [self removeFromSuperview];
+    }
+    
     [[UIApplication sharedApplication].keyWindow addSubview:self];
     
     if (0 == CGRectGetWidth(self.bounds) || 0 == CGRectGetHeight(self.bounds)) {
