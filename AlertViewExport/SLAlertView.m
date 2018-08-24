@@ -57,20 +57,23 @@ static CGFloat const SLAlertViewTopMargin = 10.f;
         self.messageLabel.text = message;
         self.delegate = delegate;
         self.alertViewStyle = style;
+        self.buttonTitles = @[].mutableCopy;
         
-        if (!cancelButtonTitle) {
-            self.buttonTitles = [NSMutableArray array];
-        } else {
-            self.buttonTitles = [NSMutableArray arrayWithObjects:cancelButtonTitle, otherButtonTitles, nil];
-            
-            va_list argList;
-            va_start(argList, otherButtonTitles);
-            NSString *buttonTitleString;
-            while ((buttonTitleString = va_arg(argList, NSString *))) {
-                [self.buttonTitles addObject:buttonTitleString];
-            }
-            va_end(argList);
+        if (cancelButtonTitle) {
+            [self.buttonTitles addObject:cancelButtonTitle];
         }
+        
+        if (otherButtonTitles) {
+            [self.buttonTitles addObject:otherButtonTitles];
+        }
+        
+        va_list argList;
+        va_start(argList, otherButtonTitles);
+        NSString *buttonTitleString;
+        while ((buttonTitleString = va_arg(argList, NSString *))) {
+            [self.buttonTitles addObject:buttonTitleString];
+        }
+        va_end(argList);
     }
     
     return self;

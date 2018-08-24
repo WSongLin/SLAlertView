@@ -51,7 +51,7 @@ typedef NS_ENUM(NSInteger, SLAlertViewStyle) {
                         style:(SLAlertViewStyle)style
                      delegate:(id)delegate
             cancelButtonTitle:(NSString *)cancelButtonTitle
-            otherButtonTitles:(NSString *)otherButtonTitles, ...NS_REQUIRES_NIL_TERMINATION;
+            otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
 
 /**
  在给定的时间(delay)后自动消失（显示标题）
